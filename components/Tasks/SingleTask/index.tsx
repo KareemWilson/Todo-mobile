@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, Text, View, TouchableOpacity } from "react-native";
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { theme } from "../../../utils/theme/styles";
 
 type SingleTaskProps = {
@@ -12,16 +12,22 @@ type SingleTaskProps = {
   };
 };
 
-const SingleTask = ({ todo }: SingleTaskProps) => {
+const SingleTask: React.FC<SingleTaskProps> = ({ todo }) => {
   return (
-    <TouchableOpacity>
+    <View>
       <View style={styles.taskCard}>
-        {/* <CheckBox
-            style={styles.checkbox}
-          /> */}
-        <Text style={styles.title}>{todo.title}</Text>
+        <TouchableOpacity>
+            {/* <CheckBox
+              style={styles.checkbox}
+            /> */}
+          <Text style={styles.title}>{todo.title}</Text>
+        </TouchableOpacity>
+        <View style={styles.iconsContainer}>
+          <Icon name="edit" size={30} color={theme.PRIMARY_COLOR} />
+          <Icon name="trash" size={30} color={theme.PRIMARY_COLOR} />
+        </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -34,6 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     margin: 15,
     padding: 15,
+    justifyContent: "space-between"
   },
   title: {
     fontSize: theme.FONT_SIZE_LARGE,
@@ -41,5 +48,11 @@ const styles = StyleSheet.create({
   },
   checkbox: {
 
+  },
+  iconsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 7,
+    alignItems: "center"
   }
 });
