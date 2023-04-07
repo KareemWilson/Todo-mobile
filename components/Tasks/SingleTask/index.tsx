@@ -2,8 +2,12 @@ import React from "react";
 import {StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { theme } from "../../../utils/theme/styles";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { MainStackParamList } from "../../../navigators/MainStack";
+import { useNavigation } from "@react-navigation/native";
 
-type SingleTaskProps = {
+
+export type SingleTaskProps = {
   todo: {
     id: number;
     title: string;
@@ -12,14 +16,14 @@ type SingleTaskProps = {
   };
 };
 
+type MainScreenNavigationType = StackNavigationProp<MainStackParamList>
+
 const SingleTask: React.FC<SingleTaskProps> = ({ todo }) => {
+  const navigation = useNavigation<MainScreenNavigationType>()
   return (
     <View>
       <View style={styles.taskCard}>
-        <TouchableOpacity>
-            {/* <CheckBox
-              style={styles.checkbox}
-            /> */}
+        <TouchableOpacity onPress={() => navigation.navigate('Details', { todo })}>
           <Text style={styles.title}>{todo.title}</Text>
         </TouchableOpacity>
         <View style={styles.iconsContainer}>
