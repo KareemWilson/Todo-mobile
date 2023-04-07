@@ -27,7 +27,6 @@ const SingleTask: React.FC<SingleTaskProps> = ({ todo }) => {
           <Text style={styles.title}>{todo.title}</Text>
         </TouchableOpacity>
         <View style={styles.iconsContainer}>
-          <Icon name="edit" size={30} color={theme.PRIMARY_COLOR} />
           <Icon name="trash" size={30} color={theme.PRIMARY_COLOR} />
         </View>
       </View>
