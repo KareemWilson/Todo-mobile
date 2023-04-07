@@ -1,22 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Tasks from './components/Tasks';
-import Login from './screens/Login/Login';
-import Signup from './screens/Signup/Signup';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthStack from './navigators/AuthStack';
+import MainStack from './navigators/MainStack';
+
+const user = true
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Signup />
-    </View>
+    <NavigationContainer>
+      {!user ? <AuthStack /> : <MainStack />}
+      
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    // backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-});
