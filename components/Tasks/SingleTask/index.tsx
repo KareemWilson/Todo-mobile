@@ -1,10 +1,13 @@
 import React from "react";
-import {StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { theme } from "../../../utils/theme/styles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { MainStackParamList } from "../../../navigators/MainStack";
 import { useNavigation } from "@react-navigation/native";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { deleteTodo } from "../../../redux/todo/todo";
+
 
 
 export type SingleTaskProps = {
@@ -13,22 +16,29 @@ export type SingleTaskProps = {
     title: string;
     description: string;
     userId: number;
+    isDone: boolean;
   };
 };
 
 type MainScreenNavigationType = StackNavigationProp<MainStackParamList>
 
 const SingleTask: React.FC<SingleTaskProps> = ({ todo }) => {
+  const dispatch = useAppDispatch()
   const navigation = useNavigation<MainScreenNavigationType>()
+
+
+  const handleDelete = () => {
+    dispatch(deleteTodo(todo.id))
+  }
   return (
     <View>
       <View style={styles.taskCard}>
         <TouchableOpacity onPress={() => navigation.navigate('Details', { todo })}>
           <Text style={styles.title}>{todo.title}</Text>
         </TouchableOpacity>
-        <View style={styles.iconsContainer}>
+        <TouchableOpacity style={styles.iconsContainer} onPress={handleDelete}>
           <Icon name="trash" size={30} color={theme.PRIMARY_COLOR} />
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

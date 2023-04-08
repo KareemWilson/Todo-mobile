@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator<MainStackParamList>()
 const MainStack = () => {
   return (
     <Stack.Navigator>
-        <Stack.Screen name='Todos' component={Todos} />
+        <Stack.Screen name='Todos' component={Todos}/>
         <Stack.Screen name='Details' component={TodoDetails} />
     </Stack.Navigator>
   )

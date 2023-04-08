@@ -6,11 +6,14 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { theme } from "../../utils/theme/styles";
 import { AuthStackParamList } from "../../navigators/AuthStack";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import validateInputs from "../../utils/validateInputs";
+import { useAppDispatch } from "../../redux/hooks";
+import { signup } from "../../redux/user/user";
 
 type authScreenNavigationType = StackNavigationProp<
   AuthStackParamList,
@@ -18,29 +21,52 @@ type authScreenNavigationType = StackNavigationProp<
 >;
 
 const Signup = () => {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+
   const navigation = useNavigation<authScreenNavigationType>();
+  const dispatch = useAppDispatch()
+
+  const handleSignup = () => {
+    const errors = validateInputs(name, email, password, passwordConfirmation)
+    if(Object.keys(errors).length === 0){
+      const newUser = {
+        name,
+        email,
+        password
+      }
+      dispatch(signup(newUser)).then(() => {
+        navigation.navigate('Login')
+      })
+    }else{
+      console.log(errors)
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.fieldContainer}>
         <Text style={styles.label}>Name</Text>
-        <TextInput style={styles.input}></TextInput>
+        <TextInput style={styles.input} onChangeText={(e) => setName(e)} />
       </View>
       <View style={styles.fieldContainer}>
         <Text style={styles.label}>Email</Text>
-        <TextInput style={styles.input}></TextInput>
+        <TextInput style={styles.input} keyboardType="email-address" onChangeText={(e) => setEmail(e)}></TextInput>
       </View>
       <View style={styles.fieldContainer}>
         <Text style={styles.label}>Password</Text>
-        <TextInput style={styles.input}></TextInput>
+        <TextInput secureTextEntry={true} style={styles.input} onChangeText={(e) => setPassword(e)}></TextInput>
       </View>
       <View style={styles.fieldContainer}>
         <Text style={styles.label}>Confirm your Password</Text>
-        <TextInput style={styles.input}></TextInput>
+        <TextInput secureTextEntry={true} style={styles.input} onChangeText={(e) => setPasswordConfirmation(e)}></TextInput>
       </View>
       <View style={styles.btnsContainer}>
         <Button
           title="Signup"
-          onPress={() => console.log("btn pressed")}
+          onPress={handleSignup}
         ></Button>
         <TouchableOpacity style={{ backgroundColor: "" }}>
           <Text onPress={() => navigation.navigate("Login")}>login</Text>

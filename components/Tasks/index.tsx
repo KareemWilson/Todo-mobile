@@ -1,15 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { todos } from '../../data'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import SingleTask from './SingleTask'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { getTodos } from '../../redux/todo/todo'
 
 const Tasks = () => {
+  const todos = useAppSelector(state => state.todos)
+  const userId = useAppSelector(state => state.currentUser.id)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getTodos(userId))    
+  }, [dispatch])
   return (
-    <View style={styles.tasksContainer}>
-      <Text style={styles.title}>Tasks</Text>
-        {todos.map((todo) => (
-            <SingleTask key={todo.id} todo={todo} />
-        ))}
+    <View style={{flex: 1}}>
+      <ScrollView style={styles.tasksContainer}>
+          {todos.length !== 0 ? todos.map((todo) => (
+              <SingleTask key={todo.id} todo={todo} />
+          )) : <Text>Start doing your Todo list by Adding your tasks below</Text>}
+      </ScrollView>
     </View>
   )
 }
@@ -18,7 +27,8 @@ export default Tasks
 
 const styles = StyleSheet.create({
     tasksContainer: {
-        paddingTop: 70,
+        marginTop: 40,
+        marginBottom: 120
     },
     title: {
         fontSize: 30,
