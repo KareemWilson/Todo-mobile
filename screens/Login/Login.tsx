@@ -44,6 +44,7 @@ const Login = () => {
       <View style={styles.fieldContainer}>
         <Text style={styles.label}>Password</Text>
         <TextInput
+          secureTextEntry={true}
           style={styles.input}
           onChangeText={(t) => setPassword(t)}
         ></TextInput>
