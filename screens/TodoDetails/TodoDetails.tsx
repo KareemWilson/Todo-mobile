@@ -10,6 +10,7 @@ const TodoDetails: React.FC<TodoDetailsProps> = ({ route }) => {
   return (
     <View>
       <Text>{todo.title}</Text>
+      <Text>{todo.description}</Text>
     </View>
   )
 }

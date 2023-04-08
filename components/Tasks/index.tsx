@@ -28,7 +28,7 @@ export default Tasks
 
 const styles = StyleSheet.create({
     tasksContainer: {
-        marginTop: 40,
+        marginTop: 70,
         marginBottom: 120
     },
     title: {
