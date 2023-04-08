@@ -1,14 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from './navigators/AuthStack';
-import MainStack from './navigators/MainStack';
+import { Provider } from 'react-redux';
+import AppStack from './navigators';
+import { store } from './redux/store';
 
-const user = true
+
 
 export default function App() {
   return (
-    <NavigationContainer>
-      {!user ? <AuthStack /> : <MainStack />}
-      
-    </NavigationContainer>
+    <Provider store={store}>
+      <AppStack />
+    </Provider>
   );
 }
