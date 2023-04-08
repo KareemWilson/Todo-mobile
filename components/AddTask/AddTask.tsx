@@ -1,4 +1,5 @@
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -11,6 +12,7 @@ import { theme } from "../../utils/theme/styles";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addTodo } from "../../redux/todo/todo";
 
+
 const AddTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -19,7 +21,7 @@ const AddTask = () => {
 
   const handleAdd = () => {
     if (title == "") {
-      console.log("title of task is required");
+      Alert.alert('Task Title is required')
     } else {
       const task = {
         title,
@@ -29,6 +31,7 @@ const AddTask = () => {
       dispatch(addTodo(task));
       setTitle('')
       setDescription('')
+      Alert.alert('Task Created Successfully')
     }
   };
 

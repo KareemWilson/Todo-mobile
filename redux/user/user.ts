@@ -3,21 +3,20 @@ import axios from "axios";
 
 const URL = "http://192.168.175.172:8000/api/users";
 
-
 type CurrentUserState = {
-    id: number
-    name: string;
-    email: string;
-    isLoggedIn: boolean;
-    message: string
+  id: number;
+  name: string;
+  email: string;
+  isLoggedIn: boolean;
+  message: string;
 };
 
 const initialState: CurrentUserState = {
-    id: 0,
-    name: "",
-    email: "",
-    isLoggedIn: false,
-    message: ''
+  id: 0,
+  name: "",
+  email: "",
+  isLoggedIn: false,
+  message: "",
 };
 
 export const login = createAsyncThunk(
@@ -29,34 +28,48 @@ export const login = createAsyncThunk(
 );
 
 export const signup = createAsyncThunk(
-    "user/signup",
-    async ({ name, email, password }: { name: string; email: string; password: string }, thunkAPI) => {
-      const res = await axios.post(`${URL}/signup`, { name, email, password });
-      return res.data;
-    }
+  "user/signup",
+  async (
+    {
+      name,
+      email,
+      password,
+    }: { name: string; email: string; password: string },
+    thunkAPI
+  ) => {
+    const res = await axios.post(`${URL}/signup`, { name, email, password });
+    return res.data;
+  }
 );
-
 
 const userSlice = createSlice({
   name: "currentUser",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.id = 0;
+      state.name = "";
+      state.email = "";
+      state.isLoggedIn = false;
+      state.message = "Logged out successfully";
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      state.id = action.payload.id
-      state.name = action.payload.name
-      state.email = action.payload.email
-      state.isLoggedIn = true
-      state.message = 'Login Successfully'
-      console.log(state);
+      state.id = action.payload.id;
+      state.name = action.payload.name;
+      state.email = action.payload.email;
+      state.isLoggedIn = true;
+      state.message = "Login Successfully";
     });
     builder.addCase(signup.fulfilled, (state, action) => {
-        state.name = action.payload.name
-        state.email = action.payload.email
-        state.message = action.payload.message
-        console.log(state);
-      });
+      state.name = action.payload.name;
+      state.email = action.payload.email;
+      state.message = action.payload.message;
+    });
   },
 });
+
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { theme } from "../../../utils/theme/styles";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -29,6 +29,7 @@ const SingleTask: React.FC<SingleTaskProps> = ({ todo }) => {
 
   const handleDelete = () => {
     dispatch(deleteTodo(todo.id))
+    Alert.alert('Task Deleted Successfully')
   }
   return (
     <View>

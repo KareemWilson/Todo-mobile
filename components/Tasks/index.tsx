@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import SingleTask from './SingleTask'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { getTodos } from '../../redux/todo/todo'
+import { theme } from '../../utils/theme/styles'
 
 const Tasks = () => {
   const todos = useAppSelector(state => state.todos)
@@ -17,7 +18,7 @@ const Tasks = () => {
       <ScrollView style={styles.tasksContainer}>
           {todos.length !== 0 ? todos.map((todo) => (
               <SingleTask key={todo.id} todo={todo} />
-          )) : <Text>Start doing your Todo list by Adding your tasks below</Text>}
+          )) : <Text style={styles.placeholderText}>Start doing your Todo list by Adding your tasks below</Text>}
       </ScrollView>
     </View>
   )
@@ -34,5 +35,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: '300',
         paddingLeft: 15
+    },
+    placeholderText: {
+      fontSize: 30,
+      textAlign: 'center',
+      marginTop: 50,
+      color: theme.PRIMARY_COLOR
     }
 })
