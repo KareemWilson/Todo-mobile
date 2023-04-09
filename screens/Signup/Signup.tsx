@@ -5,6 +5,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { theme } from "../../utils/theme/styles";
@@ -20,6 +21,10 @@ type authScreenNavigationType = StackNavigationProp<
   "Signup"
 >;
 
+interface ErrorsObject {
+  [key: string]: any;
+}
+
 const Signup = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -30,7 +35,7 @@ const Signup = () => {
   const dispatch = useAppDispatch()
 
   const handleSignup = () => {
-    const errors = validateInputs(name, email, password, passwordConfirmation)
+    const errors: ErrorsObject = validateInputs(name, email, password, passwordConfirmation)
     if(Object.keys(errors).length === 0){
       const newUser = {
         name,
@@ -41,7 +46,9 @@ const Signup = () => {
         navigation.navigate('Login')
       })
     }else{
-      console.log(errors)
+      for (const key in errors){
+        Alert.alert(errors[key])
+      }
     }
   }
 

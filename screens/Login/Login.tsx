@@ -24,14 +24,13 @@ const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useAppDispatch();
-  const isLoggedIn = useAppSelector((state) => state.currentUser.isLoggedIn);
+  const message = useAppSelector((state) => state.currentUser.message);
   const navigation = useNavigation<authScreenNavigationType>();
 
-  const handleLogin = () => {
-    dispatch(login({ name, password }))
-    Alert.alert('Login Successfully')
-  };
-
+  const handleLogin = async () => {
+    const status = (await dispatch(login({ name, password }))).meta.requestStatus
+    Alert.alert(status === 'fulfilled' ? 'Login successful' : 'Login failed')
+  }
   return (
     <View style={styles.container}>
       <View style={styles.fieldContainer}>

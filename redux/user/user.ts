@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASE_URL } from "../../constants";
 
-const URL = "http://192.168.175.172:8000/api/users";
+const URL = `${BASE_URL}/users`;
 
 type CurrentUserState = {
   id: number;
@@ -22,8 +23,8 @@ const initialState: CurrentUserState = {
 export const login = createAsyncThunk(
   "user/login",
   async ({ name, password }: { name: string; password: string }, thunkAPI) => {
-    const res = await axios.post(`${URL}/login`, { name, password });
-    return res.data;
+      const res = await axios.post(`${URL}/login`, { name, password });
+      return res.data
   }
 );
 
@@ -51,16 +52,11 @@ const userSlice = createSlice({
       state.name = "";
       state.email = "";
       state.isLoggedIn = false;
-      state.message = "Logged out successfully";
     },
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      state.id = action.payload.id;
-      state.name = action.payload.name;
-      state.email = action.payload.email;
-      state.isLoggedIn = true;
-      state.message = "Login Successfully";
+      return {...action.payload, message: 'success', isLoggedIn: true};
     });
     builder.addCase(signup.fulfilled, (state, action) => {
       state.name = action.payload.name;

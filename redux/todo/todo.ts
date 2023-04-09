@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASE_URL } from "../../constants";
 
-const URL = "http://192.168.175.172:8000/api/todos";
-// 192.168.1.84
+const URL = `${BASE_URL}/todos`;
 
 export type Todo = {
   id: number;
