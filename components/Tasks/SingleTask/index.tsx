@@ -6,7 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { MainStackParamList } from "../../../navigators/MainStack";
 import { useNavigation } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { changeStatus, deleteTodo } from "../../../redux/todo/todo";
+import { deleteTodo, updateStatus } from "../../../redux/todo/todo";
 import { CheckBox } from "@rneui/themed";
 
 export type SingleTaskProps = {
@@ -31,7 +31,12 @@ const SingleTask: React.FC<SingleTaskProps> = ({ todo }) => {
   };
 
   const handleTaskStatus = ():void => {
-    dispatch(changeStatus(todo.id))
+    const {isDone, id} = todo
+    const updatedStatus = {
+      id,
+      updatedStatus: !isDone
+    }
+    dispatch(updateStatus(updatedStatus))
   }
 
   return (
