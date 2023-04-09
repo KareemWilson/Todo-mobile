@@ -13,10 +13,6 @@ const AppStack = () => {
     (state) => state.currentUser.name
   );
 
-  useEffect(() => {
-    console.log('Here is the logging status: ',isLoggedin, name);
-  }, [isLoggedin, name])
-
   return (
     <NavigationContainer>
       {!isLoggedin ? <AuthStack /> : <MainStack />}
