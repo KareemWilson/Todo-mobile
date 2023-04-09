@@ -3,7 +3,7 @@
 ## Important Links
 
 - [API Documentation](https://github.com/KareemWilson/Todo-backend/blob/main/API.md)
-- [FrontEnd Repository](https://github.com/KareemWilson/Todo-backend)
+- [Backend Repository](https://github.com/KareemWilson/Todo-backend)
 - [ERD for DataBase](https://github.com/KareemWilson/Todo-backend/blob/main/ERD.png)
 
 
@@ -26,7 +26,7 @@
 
 # 📖 TodoList <a name="about-project"></a>
 
-**TodoList** 
+**TodoList** Mobile application made with React Native and Node.js is an application that allows users to create, manage, and track their daily tasks. The app allows users to add tasks. The user interface is simple and intuitive, making it easy for users to navigate and use. The app is built on top of a Node.js backend, which stores the tasks by dealing with PostgreSQL and Prisma.js
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -67,14 +67,14 @@ To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-In order to run this project you need:
+- In order to run this project you need:
 
 - Node js
 - Npm packages 
 
 ### Setup
 
-Clone this repository to your desired folder:
+- Clone this repository to your desired folder:
 
 ```sh
   cd my-folder
@@ -83,21 +83,23 @@ Clone this repository to your desired folder:
 
 ### Install
 
-Install this project with:
+- Install this project with:
 
 ```sh
   cd Todo-mobile
   npm install
 ```
-**Important:** *You have to check `constant.js` file and update the BASE_URL constant, You also can't type localhost:8000 because it will not work if you want to try it by expo app on your mobile*
+**Important:** *You have to check `constant.js` file and update the `BASE_URL` constant, You also **can't** use `localhost:8000` because it will not work if you want to try application by Expo app on your mobile*
 
 ### Usage
 
-To run the project, execute the following command:
+- To run the project, execute the following command:
 
 ```sh
   npm start
 ```
+
+- Scan QR Code 
 
 <!-- AUTHORS -->
 
