@@ -46,14 +46,16 @@ export const deleteTodo = createAsyncThunk(
   }
 );
 
-export const updateStatus = createAsyncThunk("todo/update", async ({
-  id,
-  updatedStatus,
-}: { id: number; updatedStatus: boolean }, thunkAPI) => {
-    console.log('here is the id: ', updatedStatus);
-    
-    const res = await axios.patch(`${URL}/${id}`, {updatedStatus});
-    return id
+export const updateStatus = createAsyncThunk(
+  "todo/update",
+  async (
+    { id, updatedStatus }: { id: number; updatedStatus: boolean },
+    thunkAPI
+  ) => {
+    console.log("here is the id: ", updatedStatus);
+
+    const res = await axios.patch(`${URL}/${id}`, { updatedStatus });
+    return id;
   }
 );
 
@@ -93,10 +95,10 @@ const todoSlice = createSlice({
             ...todo,
             isDone: !todo.isDone,
           };
-        }        
+        }
         return todo;
       });
-    } )
+    });
   },
 });
 
